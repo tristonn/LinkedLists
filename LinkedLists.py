@@ -35,14 +35,35 @@ class SinglyLinkedList:
                     the_list += str(current_node.get_value()) + "->"
             current_node = current_node.get_next_node()
         return the_list
+    
+    def remove_node(self, value):
+        current_node = self.get_head_node()
+        if current_node.get_value() == value:
+            self.head_node = current_node.get_next_node()
+        else:
+            while current_node:
+                next_node = current_node.get_next_node()
+                if next_node.get_value() == value:
+                    current_node.set_next_node(next_node.get_next_node())
+                    current_node = None
+                else:
+                    current_node = next_node
+
 
 #testing out functionality
 my_linked_list = SinglyLinkedList(25)
+print(my_linked_list.stringify_the_list())
 my_linked_list.insert_beginning(24)
+print(my_linked_list.stringify_the_list())
 my_linked_list.insert_beginning(55)
+print(my_linked_list.stringify_the_list())
 my_linked_list.insert_beginning(52)
+print(my_linked_list.stringify_the_list())
 my_linked_list.insert_beginning(22)
+print(my_linked_list.stringify_the_list())
 my_linked_list.insert_beginning(21)
+print(my_linked_list.stringify_the_list())
+my_linked_list.remove_node(24)
 print(my_linked_list.stringify_the_list())
 
 
