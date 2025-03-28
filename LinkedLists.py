@@ -1,4 +1,4 @@
-class Node:
+class UniDirNode:
     def __init__(self, value, next_node = None):
         self.value = value
         self.next_node = next_node
@@ -14,13 +14,13 @@ class Node:
 
 class SinglyLinkedList:
     def __init__(self, value):
-        self.head_node = Node(value)
+        self.head_node = UniDirNode(value)
 
     def get_head_node(self):
         return self.head_node
     
     def insert_beginning(self, value):
-        new_node = Node(value)
+        new_node = UniDirNode(value)
         new_node.set_next_node(self.head_node)
         self.head_node = new_node
 
@@ -48,6 +48,45 @@ class SinglyLinkedList:
                     current_node = None
                 else:
                     current_node = next_node
+
+class BiDirNode:
+    def __init__(self, value, prev_node = None, next_node = None):
+        self.value = value
+        self.prev_node = prev_node
+        self.next_node = next_node
+    
+    def get_value(self):
+        return self.value
+    
+    def get_next_node(self):
+        return self.next_node
+
+    def get_prev_node(self):
+        return self.prev_node
+    
+    def set_prev_node(self, prev_node):
+        self.prev_node = prev_node
+
+    def set_next_node(self, next_node):
+        self.next_node = next_node
+
+class DoublyLinkedList:
+    def __init__(self):
+        self.head_node = None
+        self.tail_node = None
+
+    def add_to_head(self, value):
+        new_head_node = BiDirNode(value)
+        current_head_node = self.head_node
+
+        if current_head_node is not None:
+            current_head_node.set_prev_node(new_head_node)
+            new_head_node.set_next_node(current_head_node)
+
+        self.head_node = new_head_node
+
+        if self.tail_node is None:
+            self.tail_node = new_head_node
 
 
 #testing out functionality
