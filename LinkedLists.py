@@ -88,23 +88,50 @@ class DoublyLinkedList:
         if self.tail_node is None:
             self.tail_node = new_head_node
 
+    def add_to_tail(self, value):
+        new_tail = BiDirNode(value)
+        current_tail = self.tail_node
 
-#testing out functionality
-my_linked_list = SinglyLinkedList(25)
-print(my_linked_list.stringify_the_list())
-my_linked_list.insert_beginning(24)
-print(my_linked_list.stringify_the_list())
-my_linked_list.insert_beginning(55)
-print(my_linked_list.stringify_the_list())
-my_linked_list.insert_beginning(52)
-print(my_linked_list.stringify_the_list())
-my_linked_list.insert_beginning(22)
-print(my_linked_list.stringify_the_list())
-my_linked_list.insert_beginning(21)
-print(my_linked_list.stringify_the_list())
-my_linked_list.remove_node(24)
-print(my_linked_list.stringify_the_list())
+        if current_tail is not None:
+            current_tail.set_next_node(new_tail)
+            new_tail.set_prev_node(current_tail)
+        
+        self.tail_node = new_tail
 
+        if self.head_node is None:
+            self.head_node = new_tail
+
+    def remove_head(self):
+        removed_head = self.head_node
+
+        if removed_head == None:
+            return None
+
+        self.head_node = removed_head.get_next_node()
+
+        if self.head_node != None:
+            self.head_node.set_prev_node(None)
+
+        if removed_head == self.tail_node:
+            self.remove_tail()
+
+        return removed_head.get_value()
+
+    def remove_tail(self):
+        removed_tail = self.tail_node
+
+        if removed_tail == None:
+            return None
+
+        self.tail_node = removed_tail.get_prev_node()
+
+        if self.tail_node != None:
+            self.tail_node.set_next_node(None)
+
+        if removed_tail == self.head_node:
+            self.remove_head()
+
+        return removed_tail.get_value()
 
 
     
